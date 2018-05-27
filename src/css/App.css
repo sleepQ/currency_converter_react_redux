@@ -1,0 +1,91 @@
+
+.App-logo {
+  animation: App-logo-spin infinite 3s linear;
+  height: 80px;
+  padding: 5%;
+  margin: auto;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn{
+  background: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 15px 10px;
+  cursor: pointer;
+}
+
+.resetBtn{
+  background: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 15px 20%;
+  cursor: pointer;
+}
+
+.select{
+  width: 25%;
+  height: 3%;
+  font-size: 17px;
+}
+
+input{
+  width: 20%;
+  height: 3%;
+  font-size: 17px;
+}
+
+p{
+  font-size: 18px;
+}
+
+table{
+  font-size: 18px;
+  font-family: sans-serif;
+  width: 50%;
+  border: 1px solid black;
+  text-align: left;
+  padding: auto;
+}
+
+tr:nth-child(even){
+  background: lightgray;
+}
+
+tr:nth-child(odd){
+  background: white;
+}
+
+th{
+  font-size: 20px;
+  border: 1px solid black;
+  background: #4CAF50;
+}
+
+.nav{
+  background: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 2px;
+  cursor: pointer;
+  width: 7%;
+}

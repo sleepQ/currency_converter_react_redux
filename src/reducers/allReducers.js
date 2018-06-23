@@ -1,5 +1,5 @@
-import  nameReducer  from './nameReducer';
-import  rateReducer  from './rateReducer';
+import nameReducer from './nameReducer';
+import rateReducer from './rateReducer';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
@@ -11,7 +11,7 @@ the enhanced history will first pass the new location through the Redux store an
 const allReducers = combineReducers({
     nameReducer,
     rateReducer,
-    routing: routerReducer
+    routerReducer,
 });
 
 export default allReducers;

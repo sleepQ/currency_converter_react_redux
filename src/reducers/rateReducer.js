@@ -28,7 +28,7 @@ const rateReducer = (state = initialRateState, action) => {
                 selectedRates1: Object.values(payload.rates)[0],
                 selectedRates2: Object.values(payload.rates)[0],
             })
-        
+
         case 'RESET_VALUES':
             return ({
                 ...state,
@@ -39,8 +39,8 @@ const rateReducer = (state = initialRateState, action) => {
         case 'UPD_VAL_ON_SELECT_1':
             return ({
                 ...state,
-                selectedRates1: action.payload.selectedRates1,
-                inputValue2: state.inputValue1 * state.selectedRates2 / action.payload.selectedRates1,
+                selectedRates1: payload.selectedRates1,
+                inputValue2: state.inputValue1 * state.selectedRates2 / payload.selectedRates1,
             })
 
         case 'UPD_VAL_ON_SELECT_2':

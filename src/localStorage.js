@@ -1,8 +1,8 @@
 import { loadStorage, setStorage } from './store'
 
 export const loadState = () => {
-    if(loadStorage('obj') || loadStorage('objRates')){
-        try{
+    if (loadStorage('obj') || loadStorage('objRates')) {
+        try {
             const obj = loadStorage('obj');
             const selectValues = loadStorage('selectValues').split(',');
             const selectedValue1 = loadStorage('selectedValue1');
@@ -13,11 +13,8 @@ export const loadState = () => {
             const selectedRates2 = loadStorage('selectedRates2');
             const objRates = loadStorage('objRates');
 
-            if( !obj || !selectValues 
-                || !selectedValue1 || !selectedValue2 
-                || !namesNrates || !date 
-                || !selectedRates1 || !selectedRates2 || !objRates){
-                    return undefined;
+            if (!obj || !objRates) {
+                return undefined;
             }
 
             return {
@@ -34,7 +31,7 @@ export const loadState = () => {
                 objRates: JSON.parse(objRates)
             }
 
-        }catch(e){
+        } catch (e) {
             return console.log(e);
         }
     }
@@ -42,7 +39,7 @@ export const loadState = () => {
 
 export const saveState = (...state) => {
     const { obj, namesNrates, objRates, date } = state[0];
-    try{    
+    try {
         setStorage('obj', JSON.stringify(obj));
         setStorage('selectValues', Object.keys(obj));
         setStorage('selectedValue1', Object.keys(obj)[0]);
@@ -53,7 +50,7 @@ export const saveState = (...state) => {
         setStorage('selectedRates2', Object.values(namesNrates)[0]);
         setStorage('objRates', JSON.stringify(objRates));
 
-    }catch(e){
+    } catch (e) {
         return console.log(e);
     }
 };

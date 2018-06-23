@@ -1,42 +1,36 @@
-import { createLogger } from 'redux-logger';
-import allReducers from './reducers/allReducers'; 
+
+import allReducers from './reducers/allReducers';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
 
 import { fetchRates, fetchNames } from './actions/actionCreators';
 import { saveState } from './localStorage';
-// import middleware from './middleware/middleware';
-//action undefined solved by applymidware order(thunk first)
 
-//cant use initial state if ure combining reducers in createStore
-
+// import { createLogger } from 'redux-logger';
 //ReduxDevTools
 //import { composeWithDevTools } from 'redux-devtools-extension';
 //const store = createStore(allReducers, composeWithDevTools(applyMiddleware(thunk)));
+
 const ratesURL = 'https://openexchangerates.org/api/latest.json?app_id=367769e2d8204e40a9e3ddc894a88205';
 const namesURL = 'https://openexchangerates.org/api/currencies.json';
-const middleware = applyMiddleware( thunk, createLogger() );
+const middleware = applyMiddleware(thunk, /* createLogger() */);
 
 const store = createStore(allReducers, middleware);
 
-export function loadStorage(item){
+export function loadStorage(item) {
     return localStorage.getItem(item);
 }
 
-export function setStorage(item, payload){
+export function setStorage(item, payload) {
     return localStorage.setItem(item, payload);
 }
 
-function getStates(){
+function getStates() {
     return store.getState();
 }
 
-if( !loadStorage('obj') || !loadStorage('selectValues') 
-    || !loadStorage('selectedValue1') || !loadStorage('selectedValue2')
-    || !loadStorage('namesNrates') || !loadStorage('date') 
-    || !loadStorage('selectedRates1') || !loadStorage('selectedRates2') 
-    || !loadStorage('objRates') ){
+if (!loadStorage('obj') || !loadStorage('objRates')) {
     store.dispatch(fetchNames(namesURL));
     store.dispatch(fetchRates(ratesURL));
 }
@@ -53,6 +47,6 @@ store.subscribe(throttle(() => {
         selectedRates2: getStates().rateReducer.selectedRates2,
         objRates: getStates().rateReducer.objRates,
     });
-},1000));
+}, 1000));
 
 export default store;

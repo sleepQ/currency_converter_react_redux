@@ -1,32 +1,31 @@
 import React from 'react';
-import Header from '../components/Header';
 import { connect } from 'react-redux';
 import '../css/App.css';
 import logo from '../css/logo.svg';
 
 class List extends React.Component {
     render() {
-        const { obj } = this.props.name;
-        const { date, namesNrates, objRates } = this.props.rate;
+        const { rate, name } = this.props;
+        const { date, namesNrates, objRates } = rate || {};
+        const { obj } = name || {};
+        const parsedDate = date && new Date(parseInt(date, 10) * 1000).toString();
+
         if (!obj || !date) {
             return <img src={logo} className="App-logo" alt="logo" />
         }
-
-        if(this.props.name.error){
-            return <h3>{this.props.name.error} - Reload The Page</h3>
+        if (name.error) {
+            return <h3>{name.error} - Reload The Page</h3>
         }
-
-        if(this.props.rate.error){
-            return <h3>{this.props.rate.error} - Reload The Page</h3>
+        if (rate.error) {
+            return <h3>{rate.error} - Reload The Page</h3>
         }
 
         return (
             <div>
-                <Header />
                 <h1>Currency list:</h1>
                 <p>Base: {objRates.base}</p>
-                <p>Last Updated: {new Date(parseInt(date, 10) * 1000).toString()}</p>
-                <br/>
+                <p>Last Updated: {parsedDate}</p>
+                <br />
                 <table>
                     <tbody>
                         <tr>
@@ -34,14 +33,12 @@ class List extends React.Component {
                             <th>Rates</th>
                         </tr>
                         {
-                            Object.keys(obj).map((name,i) => {
-                                return (
-                                    <tr key={name}>
-                                        <td> { obj[name] } </td>
-                                        <td> { namesNrates[name] } </td>
-                                    </tr>
-                                );
-                            })
+                            Object.keys(obj).map(name => (
+                                <tr key={name}>
+                                    <td>{obj[name]}</td>
+                                    <td>{namesNrates[name]}</td>
+                                </tr>
+                            ))
                         }
                     </tbody>
                 </table>
@@ -50,10 +47,10 @@ class List extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ rateReducer, nameReducer }) => {
     return {
-        rate: state.rateReducer,
-        name: state.nameReducer,
+        rate: rateReducer,
+        name: nameReducer,
     };
 };
 

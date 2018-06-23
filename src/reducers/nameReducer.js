@@ -11,10 +11,10 @@ const initialNameState = loadState() || {
 
 const nameReducer = (state = initialNameState, action) => {
     const { type, payload } = action;
-    switch(type){
+    switch (type) {
         case 'FETCHING_NAMES':
-            return  ({...state, nameIsFetchin: true})
-            
+            return ({ ...state, nameIsFetchin: true })
+
         case 'RECEIVED_NAMES':
             return ({
                 ...state,
@@ -31,26 +31,26 @@ const nameReducer = (state = initialNameState, action) => {
                 selectedValue2: state.selectedValue1,
                 selectedValue1: state.selectedValue2,
             })
-       
+
         case 'UPD_SELECTED_VAL_1':
             return ({
                 ...state,
                 selectedValue1: payload.selectedValue1,
             })
-            
+
         case 'UPD_SELECTED_VAL_2':
             return ({
                 ...state,
                 selectedValue2: payload.selectedValue2,
             })
-            
+
         case 'ERR_NAMES':
-            return  ({...state, nameIsFetchin: false, error: payload})
-            
+            return ({ ...state, nameIsFetchin: false, error: payload })
+
         default:
             return state;
-            
+
     }
-} 
+}
 
 export default nameReducer;
